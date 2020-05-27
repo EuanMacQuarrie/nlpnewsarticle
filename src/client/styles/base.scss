@@ -1,14 +1,20 @@
+$page-font: Helvetica, sans-serif;
+$primary-color: #FFF5EE;
+
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-family: $page-font;
 }
 
 main {
     flex: 2;
+    font-family: $page-font;
 }
 
 section {
     max-width: 800px;
     margin: 50px auto;
+    font: $page-font
 }
