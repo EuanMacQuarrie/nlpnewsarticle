@@ -13,4 +13,3 @@ export{
 }
 
 console.log(checkForName);
-

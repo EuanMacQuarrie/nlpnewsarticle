@@ -9,17 +9,20 @@ async function handleSubmit(event) {
         return
     }
     console.log("The link is valid");
-    await fetch
-
-
-
-
-
-    // fetch('http://localhost:8080/test')
-    // .then(res => res.json())
-    // .then(function(res) {
-    //     document.getElementById('results').innerHTML = res.message
-    // })
+    await fetch('http://localhost:8080/test',{
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application.json'
+        },
+        body: JSON.stringify({url: url_main})
+    })
+    .then(res => res.json())
+    .then(function(res) {
+        document.getElementById('polarity').innerHTML = res.polarity;
+        document.getElementById('subjectivity').innerHTML = res.subjectivity;
+        document.getElementById('confidence').innerHTML = res.confidence;
+        document.getElementById('text').innerHTML = res.text;
+    })
 }
-
 export { handleSubmit }
