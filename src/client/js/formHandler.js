@@ -9,7 +9,7 @@ async function handleSubmit(event) {
         return
     }
     console.log("The link is valid");
-    await fetch('http://localhost:8080/test',{
+    await fetch('http://localhost:8081/results',{
         method: 'POST',
         credentials: 'same-origin',
         headers: {
