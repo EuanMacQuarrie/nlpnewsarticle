@@ -1,8 +1,9 @@
-function checkForURL(url){
+function ValidURL(myURL){
+    console.log(":::Running the validURL function:::", myURL)
 
     
 }
-
+export ValidURL
 
 
 // function checkForName(inputText) {
