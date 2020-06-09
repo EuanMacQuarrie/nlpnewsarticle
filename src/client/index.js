@@ -8,6 +8,6 @@ import './styles/form.scss'
 import './styles/header.scss'
 
 export{
-    checkForUrl, 
+    ValidURL, 
     handleSubmit
 }
