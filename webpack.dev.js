@@ -3,6 +3,9 @@ const webpack = require('webpack')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const WorkboxPlugin = require('workbox-webpack-plugin')
+const babelTransformClassProperties = require("babel-core").transform("code", {
+    plugins: ["transform-class-properties"]
+  });
 
 module.exports = {
     entry: './src/client/index.js',
@@ -26,6 +29,9 @@ module.exports = {
         ]
     },
     plugins: [
+        new babelTransformClassProperties({
+            "spec": true
+        }),
         new BundleAnalyzerPlugin(),
         new HtmlWebPackPlugin({
             template: "./src/client/views/index.html",
