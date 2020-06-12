@@ -1,5 +1,3 @@
-import { response } from "express";
-
 async function handleSubmit(event) {
     event.preventDefault()
     // check what text was put into the form field
@@ -20,11 +18,14 @@ async function handleSubmit(event) {
         body: JSON.stringify({url: formInput})
     })
     .then(response => response.json())
-    .then(function(res) {
+    .then(function(response) {
         document.getElementById('polarity').innerHTML = response.polarity;
         document.getElementById('subjectivity').innerHTML = response.subjectivity;
         document.getElementById('confidence').innerHTML = response.confidence;
         document.getElementById('text').innerHTML = response.text;
+        console.log(response);
+    }).catch((error) =>{
+        console.log(error)
     })
-}
+};
 export { handleSubmit }
