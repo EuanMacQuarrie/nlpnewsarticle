@@ -1,12 +1,14 @@
 function ValidURL(myURL){
     console.log(":::Running the validURL function:::", myURL)
 
-        var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+        var regex = formInput.match("(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)");
 
-            if(regex.test(myURL)){
-        alert("A VALID URL");
-            }else{
-        alert("INVALUD URL ENTERED");
-        }
-    }
+        if(regex.test(myURL)){
+            alert("A VALID URL");
+            return true;
+        }else{
+            alert("INVALUD URL ENTERED");
+            return false
+         }
+    };
 export {ValidURL}

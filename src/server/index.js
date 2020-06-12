@@ -5,8 +5,8 @@ var path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const mockAPIResponse = require('./mockAPI.js')
 const app = express()
+const mockAPIResponse = require('./mockAPI.js')
 var Sentiment = require('sentiment');
 var aylien = require("aylien_textapi");
 // set aylien API credentias
@@ -16,8 +16,8 @@ var textapi = new aylien({
     application_key: process.env.APP_KEY
   });
 app.use(express.static('dist'));
-app.use(bodyParser).json;
-app.use(bodyParser.urlencoded({extended: false}));
+app.use((bodyParser).json());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 console.log(__dirname)
 app.get('/', function (req, res) {
@@ -41,13 +41,13 @@ app.post('/results', PostToAPI);
             'url': form,
             'mode': 'document'
         },
-        function (error, res){
+        function (error, response){
             if(error === null){
             projectData = data;
-            data.polarity = res.polarity;
-            data.subjectivity = res.subjectivity;
-            data.confidence = res.confidence;
-            data.text = res.text;
+            data.polarity = response.polarity;
+            data.subjectivity = response.subjectivity;
+            data.polarity_confidence = response.polarity_confidence;
+            data.text = response.text;
             Object.assign(projectData, data);
             console.log('API called', projectData);
             res.send(data);
