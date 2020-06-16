@@ -2,13 +2,15 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const WorkboxPlugin = require('workbox-webpack-plugin')
-const babelTransformClassProperties = require("babel-core").transform("code", {
-    plugins: ["transform-class-properties"]
-  });
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
     entry: './src/client/index.js',
+    prodServer: {
+        port: 8081,
+        localhost: 8081
+    },
     mode: 'development',
     devtool: 'source-map',
         output: {
@@ -29,17 +31,20 @@ module.exports = {
         ]
     },
     plugins: [
-        new babelTransformClassProperties({
-            "spec": true
-        }),
-        new BundleAnalyzerPlugin(),
         new HtmlWebPackPlugin({
             template: "./src/client/views/index.html",
             filename: "./index.html",
         }),
-        new WorkboxPlugin.GenerateSW({
-            clientsClaim: true,
-            skipWaiting: true
-        }), 
+        new CleanWebpackPlugin({
+            // Simulate the removal of files
+            dry: true,
+            // Write Logs to Console
+            verbose: true,
+            // Automatically remove all unused webpack assets on rebuild
+            cleanStaleWebpackAssets: true,
+            protectWebpackAssets: false
+        }),
+        new BundleAnalyzerPlugin(),
+        new WorkboxPlugin.GenerateSW()
     ]
 }
